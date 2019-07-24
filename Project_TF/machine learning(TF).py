@@ -26,11 +26,11 @@ print('测试集-规模：', test_images.shape)
 print('测试集-图片总数：', len(test_labels))
 
 # 在训练网络之前必须对数据进行预处理。 如果您检查训练集中的第一个图像，您将看到像素值落在0到255的范围内:
-# plt.figure()
-# plt.imshow(train_images[0])
-# plt.colorbar()
-# plt.grid(False)
-# plt.show()
+plt.figure()
+plt.imshow(train_images[0])
+plt.colorbar()
+plt.grid(False)
+plt.show()
 
 
 # 在馈送到神经网络模型之前，我们将这些值缩放到0到1的范围。为此，我们将像素值值除以255（黑白）。重要的是，对训练集和测试集要以相同的方式进行预处理:
@@ -116,7 +116,11 @@ def plot_image(i, predictions_array, true_label, img):
         color = 'blue'
     else:
         color = 'red'
-    plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label]),100 * np.max(predictions_array),color=color)
+    plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
+                100 * np.max(predictions_array),
+                class_names[true_label]),
+                color=color)
+
 
 def plot_value_array(i, predictions_array, true_label):
     predictions_array, true_label = predictions_array[i], true_label[i]
