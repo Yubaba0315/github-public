@@ -13,7 +13,7 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-print(tf.__version__)
+print('Tensorflow版本：', tf.__version__)
 
 # 导入Fashion_MNIST数据集，加载数据集并返回四个NumPy数组
 # train_images和train_labels数组是训练集—这是模型用来学习的数据
@@ -101,7 +101,7 @@ print('---------------------FINISHED TRAINING---------------------')
 
 # 四、评估准确率
 # 比较模型在测试数据集上的执行情况:
-print('---------------------START TO EVALUATE---------------------')
+print('=====================START TO EVALUATE=====================')
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
 
