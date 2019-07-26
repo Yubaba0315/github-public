@@ -1,3 +1,8 @@
+
+# from _future_ import 导入后续版本中的新特性，使旧版编码规范下的代码不需要大量修改就可以调用新特性
+# absolute_import 从相对导入变成绝对导入,py3的import用法，加上这句话py2时候也能按照py3的import语法去正常使用
+# division精确除法
+# 超前使用python3的print函数
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 # 导入TensorFlow和tf.keras
@@ -24,18 +29,25 @@ print('训练集-图片总数：', len(train_labels))
 print('训练集-标签：', train_labels)
 print('测试集-规模：', test_images.shape)
 print('测试集-图片总数：', len(test_labels))
+print('测试集-标签：', test_labels)
 
 # 在训练网络之前必须对数据进行预处理。 如果您检查训练集中的第一个图像，您将看到像素值落在0到255的范围内:
 plt.figure()
 plt.imshow(train_images[0])
 plt.colorbar()
-plt.grid(False)
+plt.grid(True)
 plt.show()
 
 
 # 在馈送到神经网络模型之前，我们将这些值缩放到0到1的范围。为此，我们将像素值值除以255（黑白）。重要的是，对训练集和测试集要以相同的方式进行预处理:
 train_images = train_images / 255.0
 test_images = test_images / 255.0
+# 检查训练集中的第一个图像，您将看到像素值已经变为落在0到1之间
+plt.figure()
+plt.imshow(train_images[0])
+plt.colorbar()
+plt.grid(True)
+plt.show()
 
 
 # 显示训练集中的前25个图像，并在每个图像下方显示类名。验证数据格式是否正确，我们是否已准备好构建和训练网络。
@@ -98,13 +110,14 @@ print('Test accuracy:', test_acc)
 predictions = model.predict(test_images)
 
     # 第一个预测:
-print(predictions[0])
+print('第一个预测各结果置信度：', predictions[0])
 
     # 预测是10个数字的数组。这些描述了模型的"信心"，即图像对应于10种不同服装中的每一种。我们可以看到哪个标签具有最高的置信度值：
-np.argmax(predictions[0])
-print(test_labels[0])
+    # 哪个标签具有最高的置信度值
+print('预测结果中具有最高的置信度值的标签：', np.argmax(predictions[0]))
+print('图片对应的真实标签：', test_labels[0])
 
-    # 用图表来查看全部10个类别
+# 用图表来查看全部10个类别
 def plot_image(i, predictions_array, true_label, img):
     predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
     plt.grid(False)
@@ -120,8 +133,6 @@ def plot_image(i, predictions_array, true_label, img):
                 100 * np.max(predictions_array),
                 class_names[true_label]),
                 color=color)
-
-
 def plot_value_array(i, predictions_array, true_label):
     predictions_array, true_label = predictions_array[i], true_label[i]
     plt.grid(False)
@@ -134,7 +145,7 @@ def plot_value_array(i, predictions_array, true_label):
     thisplot[predicted_label].set_color('red')
     thisplot[true_label].set_color('blue')
 
-
+# 单个对象的预测
     # 第0个图像，预测和预测数组。
 i = 0
 plt.figure(figsize=(6,3))
@@ -143,7 +154,6 @@ plot_image(i, predictions, test_labels, test_images)
 plt.subplot(1,2,2)
 plot_value_array(i, predictions,  test_labels)
 plt.show()
-
     # 第12个图像，预测和预测数组。
 i = 12
 plt.figure(figsize=(6,3))
@@ -153,7 +163,7 @@ plt.subplot(1,2,2)
 plot_value_array(i, predictions,  test_labels)
 plt.show()
 
-
+# 多个对象的预测
     # 绘制几个图像及其预测结果。正确的预测标签是蓝色的，不正确的预测标签是红色的。该数字给出了预测标签的百分比(满分100)。请注意，即使非常自信，也可能出错。
     # 绘制前X个测试图像，预测标签和真实标签以蓝色显示正确的预测，红色显示不正确的预测
 num_rows = 5
