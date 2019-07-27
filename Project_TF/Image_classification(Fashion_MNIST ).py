@@ -4,11 +4,9 @@
 # division精确除法
 # 超前使用python3的print函数
 from __future__ import absolute_import, division, print_function, unicode_literals
-
 # 导入TensorFlow和tf.keras
 import tensorflow as tf
 from tensorflow import keras
-
 # 导入辅助库
 import numpy as np
 import matplotlib.pyplot as plt
