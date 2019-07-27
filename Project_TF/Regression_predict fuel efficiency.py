@@ -4,27 +4,28 @@ from tensorflow import keras
 # import pathlib
 import matplotlib.pyplot as plt
 import pandas as pd
-# 使用seaborn进行pairplot数据可视化，安装命令
+# 使用seaborn进行pairplot数据可视化
 import seaborn as sns
+
 print('Tensorflow版本：', tf.__version__)
 
 # 1.1 下载数据集
 dataset_path = keras.utils.get_file("auto-mpg.data", "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
 print('数据存放路径：', dataset_path)
 # 用pandas导入数据
-column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight',
-                'Acceleration', 'Model Year', 'Origin']
-raw_dataset = pd.read_csv(dataset_path, names=column_names,
-                      na_values = "?", comment='\t',
-                      sep=" ", skipinitialspace=True)
+column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year', 'Origin']
+raw_dataset = pd.read_csv(dataset_path, names=column_names, na_values = "?", comment='\t', sep=" ", skipinitialspace=True)
 dataset = raw_dataset.copy()
 print(dataset.tail())
+print('样本尺寸：', dataset.shape)
+print('样本数：', len(dataset))
+
 
 # 1.2 数据清理,删除未知数据
 print('数据集中的未知内容：', dataset.isna().sum())
 dataset = dataset.dropna()
 
-# “Origin”这一列实际上是分类(国家)，而不是数字。 所以把它转换为独热编码：
+# “Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
 origin = dataset.pop('Origin')
 dataset['USA'] = (origin == 1)*1.0
 dataset['Europe'] = (origin == 2)*1.0
