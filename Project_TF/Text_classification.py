@@ -8,6 +8,8 @@ print('Tensorflow版本：', tf.__version__)
 # 以下代码会将 IMDB 数据集下载到您的计算机上（如果您已下载该数据集，则会使用缓存副本）：
 imdb = keras.datasets.imdb
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)
+print('训练集规模：',len(train_data))
+print('测试集规模：',len(test_data))
     # 参数 num_words=10000 会保留训练数据中出现频次在前 10000 位的字词。为确保数据规模处于可管理的水平，罕见字词将被舍弃。
 
 # 探索数据
@@ -32,7 +34,7 @@ word_index["<UNUSED>"] = 3
 reverse_word_index = dict([(value, key) for (key, value) in word_index.items()])
 def decode_review(text):
     return ' '.join([reverse_word_index.get(i, '?') for i in text])
-print(decode_review(train_data[0]))
+print('以下为由整数转回的字词：', decode_review(train_data[0]))
 
 # 准备数据
 # 影评（整数数组）必须转换为张量，然后才能馈送到神经网络中。我们可以通过以下两种方法实现这种转换：
@@ -71,7 +73,6 @@ model.summary()
         # 接下来，一个 GlobalAveragePooling1D 层通过对序列维度求平均值，针对每个样本返回一个长度固定的输出向量。这样，模型便能够以尽可能简单的方式处理各种长度的输入。
         # 该长度固定的输出向量会传入一个全连接 (Dense) 层（包含 16 个隐藏单元）。
         # 最后一层与单个输出节点密集连接。应用 sigmoid 激活函数后，结果是介于 0 到 1 之间的浮点值，表示概率或置信水平。
-
 # 损失函数和优化器
 # 模型在训练时需要一个损失函数和一个优化器。由于这是一个二元分类问题且模型会输出一个概率（应用 S 型激活函数的单个单元层），因此我们将使用 binary_crossentropy 损失函数。
 # 该函数并不是唯一的损失函数，例如，您可以选择 mean_squared_error。但一般来说，binary_crossentropy 更适合处理概率问题，它可测量概率分布之间的“差距”，在本例中则为实际分布和预测之间的“差距”。
@@ -80,11 +81,13 @@ model.compile(optimizer=tf.train.AdamOptimizer(),
               metrics=['accuracy'])
 
 # 创建验证集
-# 在训练时，我们需要检查模型处理从未见过的数据的准确率。我们从原始训练数据中分离出 10000 个样本，创建一个验证集。（为什么现在不使用测试集？我们的目标是仅使用训练数据开发和调整模型，然后仅使用一次测试数据评估准确率。）
-#
+# 目标是仅使用训练数据开发和调整模型，然后仅使用一次测试数据评估准确率。在训练时，我们需要检查模型处理从未见过的数据的准确率
+# 我们从原始训练数据中分离出 10000 个样本，创建一个验证集。
 x_val = train_data[:10000]
-partial_x_train = train_data[10000:]
 y_val = train_labels[:10000]
+
+# 第10000个以后的数据作为训练集
+partial_x_train = train_data[10000:]
 partial_y_train = train_labels[10000:]
 
 # 训练模型
@@ -114,7 +117,6 @@ acc = history.history['acc']
 val_acc = history.history['val_acc']
 loss = history.history['loss']
 val_loss = history.history['val_loss']
-
 epochs = range(1, len(acc) + 1)
 
 # "bo" is for "blue dot"
@@ -139,7 +141,5 @@ plt.legend()
 plt.show()
 
 # 在该图表中，圆点表示训练损失和准确率，实线表示验证损失和准确率。
-#
 # 可以注意到，训练损失随着周期数的增加而降低，训练准确率随着周期数的增加而提高。在使用梯度下降法优化模型时，这属于正常现象 - 该方法应在每次迭代时尽可能降低目标值。
-#
 # 验证损失和准确率的变化情况并非如此，它们似乎在大约 20 个周期后达到峰值。这是一种过拟合现象：模型在训练数据上的表现要优于在从未见过的数据上的表现。在此之后，模型会过度优化和学习特定于训练数据的表示法，而无法泛化到测试数据。
