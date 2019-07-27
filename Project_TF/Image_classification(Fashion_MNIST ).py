@@ -49,7 +49,6 @@ plt.colorbar()
 plt.grid(True)
 plt.show()
 
-
 # 显示训练集中的前25个图像，并在每个图像下方显示类名。验证数据格式是否正确，我们是否已准备好构建和训练网络。
 plt.figure(figsize=(10,10))
 for i in range(25):
@@ -60,8 +59,6 @@ for i in range(25):
     plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
-
-
 
 # 构建模型
 # 构建神经网络需要配置模型的层，然后编译模型。
@@ -77,7 +74,6 @@ model = keras.Sequential([
         # 可以将这个网络层视为它将图像中未堆叠的像素排列在一起。这个网络层没有需要学习的参数;它仅仅对数据进行格式化。
         # 在像素被展平之后，网络由一个包含有两个tf.keras.layers.Dense网络层的序列组成。他们被称作“稠密链接层”或“全连接层” 。
         # 第一个Dense网络层包含有128个节点(或被称为神经元)。第二个(也是最后一个)网络层是一个包含10个节点的softmax层—它将返回包含10个概率分数的数组，总和为1。每个节点包含一个分数，表示当前图像属于10个类别之一的概率。
-
 
 # 二、编译模型
 # 在模型准备好进行训练之前，它还需要一些配置。这些是在模型的编译(compile)步骤中添加的:
