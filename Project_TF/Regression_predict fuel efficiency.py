@@ -13,6 +13,7 @@ print('Tensorflow版本：', tf.__version__)
 dataset_path = keras.utils.get_file("auto-mpg.data", "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
 print('数据存放路径：', dataset_path)
 # 用pandas导入数据
+# 数据内容：燃油利用率、气缸数、排量、马力、重量、加速度、制造年份、国家
 column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year', 'Origin']
 raw_dataset = pd.read_csv(dataset_path, names=column_names, na_values = "?", comment='\t', sep=" ", skipinitialspace=True)
 dataset = raw_dataset.copy()
@@ -22,17 +23,17 @@ print('样本数：', len(dataset))
 
 
 # 1.2 数据清理
-# 删除未知数据
+# 1.2.1 删除未知数据
 print('数据集中的未知内容：', dataset.isna().sum())
 dataset = dataset.dropna()
-# “Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
+# 1.2.2“Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
 origin = dataset.pop('Origin')
 dataset['USA'] = (origin == 1)*1.0
 dataset['Europe'] = (origin == 2)*1.0
 dataset['Japan'] = (origin == 3)*1.0
 print(dataset.tail())
 
-# 1.3. 将数据分为训练集和测试集
+# 1.3 将数据分为训练集和测试集
 train_dataset = dataset.sample(frac=0.8,random_state=0)
 test_dataset = dataset.drop(train_dataset.index)
 
@@ -94,11 +95,16 @@ class PrintDot(keras.callbacks.Callback):
   def on_epoch_end(self, epoch, logs):
     if epoch % 100 == 0: print('')
     print('>', end='')
+
+
+print('\n','---------------------START TO TRAINING---------------------')
 EPOCHS = 1000
-history = model.fit(
-  normed_train_data, train_labels,
-  epochs=EPOCHS, validation_split = 0.2, verbose=0,
-  callbacks=[PrintDot()])
+history = model.fit(normed_train_data, train_labels,
+                    epochs=EPOCHS,
+                    validation_split = 0.2,
+                    verbose=0,
+                    callbacks=[PrintDot()])
+print('\n','---------------------FINISHED TRAINING---------------------')
 
 # 使用存储在history对象中的统计数据可视化模型的训练进度。
 hist = pd.DataFrame(history.history)
@@ -145,7 +151,7 @@ plot_history(history)
 # 使用测试集来看一下泛化模型效果，我们在训练模型时没有使用测试集
 # 当我们在现实世界中使用模型时，我们可以期待模型预测。
 loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
-print("Testing set Mean Abs Error: {:5.2f} MPG".format(mae))
+print('\n', "Testing set Mean Abs Error: {:5.2f} MPG".format(mae))
 
 # 2.4. 预测
 # 最后，使用测试集中的数据预测MPG值：
@@ -160,7 +166,7 @@ plt.ylim([0,plt.ylim()[1]])
 _ = plt.plot([-100, 100], [-100, 100])
 plt.show()
 
-# 看起来我们的模型预测得相当好，我们来看看错误分布：
+# 绘制误差分布图：
 error = test_predictions - test_labels
 plt.hist(error, bins = 25)
 plt.xlabel("Prediction Error [MPG]")
