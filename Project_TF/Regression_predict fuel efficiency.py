@@ -21,10 +21,10 @@ print('样本尺寸：', dataset.shape)
 print('样本数：', len(dataset))
 
 
-# 1.2 数据清理,删除未知数据
+# 1.2 数据清理
+# 删除未知数据
 print('数据集中的未知内容：', dataset.isna().sum())
 dataset = dataset.dropna()
-
 # “Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
 origin = dataset.pop('Origin')
 dataset['USA'] = (origin == 1)*1.0
