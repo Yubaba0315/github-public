@@ -10,7 +10,6 @@ from tensorflow import keras
 # 导入辅助库
 import numpy as np
 import matplotlib.pyplot as plt
-
 print('Tensorflow版本：', tf.__version__)
 
 # 导入Fashion_MNIST数据集，加载数据集并返回四个NumPy数组
