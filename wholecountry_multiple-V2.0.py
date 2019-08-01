@@ -3,6 +3,7 @@
 # @Author: civilchenyu@foxmail.com
 # @File: lianjia_Spider.py
 
+import os
 import requests
 import sys
 import importlib
@@ -326,10 +327,13 @@ class CsLianJiaSpider():
         print(data1 + data2)
 
         # 输出
+        os.chdir(path)
+
         file_country = open(str(now) + ' -WholeCountry-OutputData.txt', 'a', encoding='utf-8')
         file_country.write(','.join(data1+data2)+'\n')
         file_country.close()
 
+        os.chdir(path)
         file_city = open(str(now) + str(city_name) + '-OutputData.txt', 'a', encoding='utf-8')
         file_city.write(','.join(data1+data2)+'\n')
         file_city.close()
@@ -339,8 +343,15 @@ class CsLianJiaSpider():
 # 主 程 序
 if __name__ == "__main__":
     now = time.strftime("%Y-%m-%d", time.localtime())
-    file_country = open(str(now) + ' -WholeCountry-OutputData.txt', 'a', encoding='utf-8')
-    file_country.write('''城市,区域,板块,小区名字,90天成交量,正在出租套数,地铁情况,二手房在售套数,二手房挂牌均价（元）,建成时间,楼型,物业费（元/平米/月）,物业公司,开发商,总栋数,总户数''')
-    file_country.write('\n')
-    file_country.close()
+    path = 'E:/Data of Lianjia/'+ str(now)+ '/'
+    if not os.path.exists(path):
+        os.mkdir(path)
+    try:
+        os.chdir(path)
+        file_country = open(str(now) + ' -WholeCountry-OutputData.txt', 'a', encoding='utf-8')
+        file_country.write('''城市,区域,板块,小区名字,90天成交量,正在出租套数,地铁情况,二手房在售套数,二手房挂牌均价（元）,建成时间,楼型,物业费（元/平米/月）,物业公司,开发商,总栋数,总户数''')
+        file_country.write('\n')
+        file_country.close()
+    except Exception as e:
+        print('保存失败', e)
     worker = CsLianJiaSpider()
