@@ -17,25 +17,29 @@ print('数据存放路径：', dataset_path)
 column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year', 'Origin']
 raw_dataset = pd.read_csv(dataset_path, names=column_names, na_values = "?", comment='\t', sep=" ", skipinitialspace=True)
 dataset = raw_dataset.copy()
-print(dataset.tail())
+# print(dataset.tail())
+# print(dataset)
 print('样本尺寸：', dataset.shape)
 print('样本数：', len(dataset))
 
 
 # 1.2 数据清理
 # 1.2.1 删除未知数据
-print('数据集中的未知内容：', dataset.isna().sum())
+print('数据集中的未知内容：'+ '\n', dataset.isna().sum())
 dataset = dataset.dropna()
 # 1.2.2“Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
 origin = dataset.pop('Origin')
 dataset['USA'] = (origin == 1)*1.0
 dataset['Europe'] = (origin == 2)*1.0
 dataset['Japan'] = (origin == 3)*1.0
-print(dataset.tail())
+print('数据集：'+ '\n',dataset)
+print('数据集最后5条：'+ '\n', dataset.tail())
 
 # 1.3 将数据分为训练集和测试集
 train_dataset = dataset.sample(frac=0.8,random_state=0)
 test_dataset = dataset.drop(train_dataset.index)
+print('训练集：'+ '\n', train_dataset)
+print('测试集：'+ '\n', test_dataset)
 
 # 1.4   检查数据
 # 1.4.1 快速浏览训练集中几对列的联合分布：
