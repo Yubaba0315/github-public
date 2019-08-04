@@ -54,7 +54,7 @@ class CsLianJiaSpider():
         content = response.text.encode('unicode-escape').decode('unicode-escape')
         if not content:
             print('获取全国城市列表失败')
-            return None
+            return
         whole_list = etree.HTML(content)
         provinces = whole_list.xpath("//div[@class='city_list_section']/ul[@class='city_list_ul']/li")
         if not provinces:
@@ -65,28 +65,14 @@ class CsLianJiaSpider():
             lis = ul_tree.xpath("//div[@class='city_province']/ul/li")
             if not lis:
                 print("find no city")
-                return
+                continue
             for citys_li in lis:
                 citys_tree = etree.HTML(tostring(citys_li))
                 one_city_url = citys_tree.xpath("//a/@href")[0]
                 city_name = citys_tree.xpath("//a/text()")
                 city_name = "" if not city_name else city_name[0]
                 CITY_LIST.append(one_city_url)
-
-                # # 获取城市名
-                # mother_url = re.findall("(.*)xiaoqu.*", str(url))[0]
-                # response_mother_url = requests.get(mother_url, timeout=TIMEOUT, headers=self.headers)
-                # response_mother_url.encoding = 'unicode'
-                # if not response_mother_url:
-                #     print('城市名获取失败')
-                #     return
-                # city_content = response_mother_url.text.encode('unicode-escape').decode('unicode-escape')
-                # if not city_content:
-                #     return
-                # city_tree = etree.HTML(city_content)
-                # city = city_tree.xpath("//span[@class='exchange']/text()")
-                # city = "" if not city else city[0]
-
+                # 根据城市列表建立各城市数据txt文件
                 now = time.strftime("%Y-%m-%d", time.localtime())
                 file_city = open(str(now) + str(city_name) + '-OutputData.txt', 'a', encoding='utf-8')
                 file_city.write(
@@ -126,17 +112,10 @@ class CsLianJiaSpider():
             for home_page_url in SEARCH_LIST:
                 executor.submit(self.start, home_page_url)
 
-
-        # self.start(SEARCH_LIST)
-
 # 2-调用多线程，逐级爬取
     def start(self,home_page_url):
-        # for home_page_url in SEARCH_LIST:       # 遍历爬取一级网页
-        pages = self.get_pages(home_page_url)       # 调用函数2，抓取网页
-        # except Exception as e:
-        #     print("error get pages {}".format(home_page_url))
-        #     print(e)
-        #     pages = None
+        # 调用函数3，获取区域总页数
+        pages = self.get_pages(home_page_url)
         if not pages:
             print("error get pages {}".format(home_page_url))
             pages = None
@@ -150,7 +129,7 @@ class CsLianJiaSpider():
 # 3-校验待爬取网页，从列表页中获取总页数，若失败调用4重新获取
     def get_pages(self, home_page_url):
         """
-        从列表页中获取当前站点总页数
+        从列表页中获取当前区域总页数
         :param home_page_url:
         :return:
         """
@@ -244,7 +223,6 @@ class CsLianJiaSpider():
             # 地铁信息
             subway = li_tree.xpath("//div[@class='tagList']/span/text()")
             subway = "非地铁沿线" if not subway else subway[0]
-
             data1 = [city_name,
                      qu,
                      bankuai,
@@ -271,7 +249,6 @@ class CsLianJiaSpider():
         if not content:
             print("{} content is none.".format(url))    # 将格式化内容的位置用大括号{}占位，用format()函数对网址格式化
             return
-
         # etree：构造了一个XPath解析对象并对HTML文本进行自动修正，相当于对content进行格式化
         tree = etree.HTML(content)
 
@@ -328,7 +305,6 @@ class CsLianJiaSpider():
 
         # 输出
         os.chdir(path)
-
         file_country = open(str(now) + ' -WholeCountry-OutputData.txt', 'a', encoding='utf-8')
         file_country.write(','.join(data1+data2)+'\n')
         file_country.close()
@@ -337,7 +313,6 @@ class CsLianJiaSpider():
         file_city = open(str(now) + str(city_name) + '-OutputData.txt', 'a', encoding='utf-8')
         file_city.write(','.join(data1+data2)+'\n')
         file_city.close()
-        # print(data1 + data2)
 
 
 # 主 程 序

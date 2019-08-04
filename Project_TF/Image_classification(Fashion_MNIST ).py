@@ -7,6 +7,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 # 导入TensorFlow和tf.keras
 import tensorflow as tf
 from tensorflow import keras
+from keras.callbacks import TensorBoard
 # 导入辅助库
 import numpy as np
 import matplotlib.pyplot as plt
