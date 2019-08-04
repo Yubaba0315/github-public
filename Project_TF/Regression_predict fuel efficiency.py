@@ -107,26 +107,29 @@ print("初始模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae)
 class PrintDot(keras.callbacks.Callback):   #
     def on_epoch_end(self, epoch, logs):
         if epoch % 100 == 0: print('完成训练周期epoch：',epoch)
-        print('>', end='训练结束！')
+        print('>', end='')
 
-tbCallBack = TensorBoard(log_dir='./Graph',
+tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph',
 histogram_freq=1,
 write_graph=True,
 write_grads=True,
 write_images=True)
-# tb=TensorBoard(log_dir='./logs',  # log 目录
-#             histogram_freq=1,  # 按照何等频率（epoch）来计算直方图，0为不计算
-#             batch_size=32, # 用多大量的数据计算直方图
-#             write_graph=True,  # 是否存储网络结构图
-#             write_grads=True,  # 是否可视化梯度直方图
-#             write_images=True,) # 是否可视化参数
-# embeddings_freq=0,
-# embeddings_layer_names=None,
-# embeddings_metadata=None)
+# histogram_freq=1,
+# write_graph=True,
+# write_images=True)
+# tb=keras.callbacks.TensorBoard(log_dir='./logs',  # log 目录
+# #             histogram_freq=1,  # 按照何等频率（epoch）来计算直方图，0为不计算
+# #             batch_size=32, # 用多大量的数据计算直方图
+# #             write_graph=True,  # 是否存储网络结构图
+# #             write_grads=True,  # 是否可视化梯度直方图
+# #             write_images=True,) # 是否可视化参数
+# # embeddings_freq=0,
+# # embeddings_layer_names=None,
+# # embeddings_metadata=None)
 
 
 print('\n','--------------------------------START TO TRAINING--------------------------------')
-EPOCHS = 1000
+EPOCHS = 500
 history = model.fit(normed_train_data, train_labels,
                     epochs=EPOCHS,
                     validation_split=0.2,
@@ -145,12 +148,11 @@ print("模型均方误差(Mean Square Error)：{:5.2f} MPG^2".format(mse))
 # 使用存储在history对象中的统计数据可视化模型的训练进度。
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
-print('输出训练历史数据：' + '\n', hist.tail())
+print('周期历史记录：' + '\n', hist.tail())
 
 def plot_history(history):
   hist = pd.DataFrame(history.history)
   hist['epoch'] = history.epoch
-
   plt.figure()
   plt.xlabel('Epoch')
   plt.ylabel('Mean Abs Error [MPG]')
@@ -160,7 +162,6 @@ def plot_history(history):
            label = 'Val Error')
   plt.ylim([0,5])
   plt.legend()
-
   plt.figure()
   plt.xlabel('Epoch')
   plt.ylabel('Mean Square Error [$MPG^2$]')
