@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc686d27-8a44-43f9-b447-4c19572baf92" name="默认更改列表" comment="Tensorflow学习：回归分析--预测燃油效率V1.2">
-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="fc686d27-8a44-43f9-b447-4c19572baf92" name="默认更改列表" comment="Tensorflow学习：回归分析--with tensorboard V1.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py" beforeDir="false" afterPath="$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Regression_predict fuel efficiency.py" beforeDir="false" afterPath="$PROJECT_DIR$/Regression_predict fuel efficiency.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wholecountry_multiple-V2.0.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wholecountry_multiple-V2.0.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,12 +12,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Project_TF$Regression_predict_fuel_efficiency.coverage" NAME="Regression_predict fuel efficiency Coverage Results" MODIFIED="1564880428580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_TF$Regression_predict_fuel_efficiency.coverage" NAME="Regression_predict fuel efficiency Coverage Results" MODIFIED="1565013064707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_TF$Text_classification.coverage" NAME="Text_classification Coverage Results" MODIFIED="1564231404394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_TF$Image_classification_Fashion_MNIST__.coverage" NAME="Image_classification(Fashion_MNIST ) Coverage Results" MODIFIED="1564876140325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_TF$Image_classification_Conv2D_.coverage" NAME="Image_classification(Conv2D) Coverage Results" MODIFIED="1565085716949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_TF$Image_classification_Fashion_MNIST__.coverage" NAME="Image_classification(Fashion_MNIST ) Coverage Results" MODIFIED="1565104753173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_TF$multiple.coverage" NAME="multiple Coverage Results" MODIFIED="1564846246597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/Project_TF$Image_classification_Fashion_MNIST_Conv2D_.coverage" NAME="Image_classification(Fashion_MNIST_Conv2D) Coverage Results" MODIFIED="1565109608420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_TF$machine_learning_TF_.coverage" NAME="machine learning(TF) Coverage Results" MODIFIED="1564117449052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_TF$single.coverage" NAME="single Coverage Results" MODIFIED="1563981664204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/Project_TF$single.coverage" NAME="single Coverage Results" MODIFIED="1565105151880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -41,25 +40,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Regression_predict fuel efficiency.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1491">
-              <caret line="109" column="23" lean-forward="true" selection-start-line="109" selection-start-column="23" selection-end-line="109" selection-end-column="23" />
+            <state relative-caret-position="3024">
+              <caret line="201" column="20" selection-start-line="201" selection-start-column="20" selection-end-line="201" selection-end-column="20" />
               <folding>
-                <element signature="e#0#82#0" expanded="true" />
+                <element signature="e#175#257#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST_Conv2D).py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="89" column="70" selection-start-line="89" selection-start-column="70" selection-end-line="89" selection-end-column="70" />
+            <state relative-caret-position="494">
+              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
               <folding>
-                <element signature="e#175#257#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,8 +92,10 @@
         <option value="$PROJECT_DIR$/Text_classification.py" />
         <option value="D:/Anaconda3/Lib/site-packages/tensorflow/python/keras/datasets/imdb.py" />
         <option value="$USER_HOME$/Desktop/python脚本/backup history/multiple.py" />
-        <option value="$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py" />
         <option value="$PROJECT_DIR$/Regression_predict fuel efficiency.py" />
+        <option value="$PROJECT_DIR$/Image_classification(Conv2D).py" />
+        <option value="$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py" />
+        <option value="$PROJECT_DIR$/Image_classification(Fashion_MNIST_Conv2D).py" />
       </list>
     </option>
   </component>
@@ -105,9 +106,9 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="添加" />
@@ -117,17 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope '项目文件'; set:项目文件; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="Project_TF" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,13 +129,24 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope '项目文件'; set:项目文件; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Project_TF" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../multiple.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Image_classification(Fashion_MNIST_Conv2D).py" />
     <property name="node.js.path.for.package.stylelint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.stylelint" value="" />
@@ -153,7 +154,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.常规" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -174,7 +175,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Regression_predict fuel efficiency">
+  <component name="RunManager" selected="Python.Image_classification(Fashion_MNIST_Conv2D)">
+    <configuration name="Image_classification(Conv2D)" type="PythonConfigurationType" factoryName="Python">
+      <module name="Project_TF" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="E:\github-public\Project_TF\Image_classification(MNIST_Conv2D).py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Image_classification(Fashion_MNIST )" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Project_TF" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,6 +212,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Image_classification(Fashion_MNIST_Conv2D)" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Project_TF" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Image_classification(Fashion_MNIST_Conv2D).py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -308,8 +353,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.Image_classification(Fashion_MNIST_Conv2D)" />
       <item itemvalue="Python.Image_classification(Fashion_MNIST )" />
       <item itemvalue="Python.Regression_predict fuel efficiency" />
+      <item itemvalue="Python.Image_classification(Conv2D)" />
       <item itemvalue="Python.multiple" />
       <item itemvalue="Python.Text_classification" />
       <item itemvalue="Python.single" />
@@ -346,7 +393,18 @@
       <workItem from="1564675830051" duration="496000" />
       <workItem from="1564804032249" duration="1349000" />
       <workItem from="1564831080579" duration="13752000" />
-      <workItem from="1564873694248" duration="5636000" />
+      <workItem from="1564873694248" duration="6128000" />
+      <workItem from="1564881726868" duration="6900000" />
+      <workItem from="1564934310574" duration="991000" />
+      <workItem from="1564966964167" duration="5070000" />
+      <workItem from="1564982771542" duration="599000" />
+      <workItem from="1565008475343" duration="2734000" />
+      <workItem from="1565013155166" duration="25000" />
+      <workItem from="1565014757530" duration="5666000" />
+      <workItem from="1565054878524" duration="726000" />
+      <workItem from="1565065582498" duration="946000" />
+      <workItem from="1565083594609" duration="5164000" />
+      <workItem from="1565099650615" duration="9494000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交：TensorFlow机器学习--开始！">
       <created>1563974411914</created>
@@ -488,11 +546,32 @@
       <option name="project" value="LOCAL" />
       <updated>1564656160217</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Tensorflow学习：回归分析--with tensorboard V1.3">
+      <created>1564881261080</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1564881261080</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Tensorflow学习：回归分析--with tensorboard V1.3">
+      <created>1564883683855</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1564883683855</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Tensorflow学习：回归分析--with tensorboard V1.4">
+      <created>1565105431857</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1565105431857</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76461000" />
+    <option name="totallyTimeSpent" value="115268000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -507,12 +586,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45747802" visible="true" weight="0.121983916" />
-      <window_info id="Structure" order="1" sideWeight="0.542522" side_tool="true" weight="0.121983916" />
-      <window_info id="Favorites" order="2" sideWeight="0.51319647" side_tool="true" weight="0.10656837" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46615386" weight="0.5878285" />
+      <window_info id="Structure" order="1" sideWeight="0.53384614" side_tool="true" weight="0.406639" />
+      <window_info id="Favorites" order="2" sideWeight="0.53079176" side_tool="true" weight="0.12600537" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" x="224" y="582" width="1286" height="219" id="Run" order="2" sideWeight="0.49609375" visible="true" weight="0.29325512" />
+      <window_info anchor="bottom" x="224" y="582" width="1286" height="219" id="Run" order="2" sideWeight="0.49609375" weight="0.42375368" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -521,42 +600,17 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49932975" weight="0.3276923" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50390625" side_tool="true" weight="0.313783" />
-      <window_info anchor="bottom" id="调试" order="11" weight="0.4398827" />
+      <window_info anchor="bottom" id="调试" order="11" weight="0.40469208" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.3276923" />
       <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.49932975" weight="0.31076923" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" sideWeight="0.49932975" weight="0.32991204" />
-      <window_info anchor="right" x="0" y="0" width="337" height="638" id="文档" order="0" sideWeight="0.47686118" side_tool="true" weight="0.37466487" />
+      <window_info anchor="right" x="0" y="0" width="337" height="638" id="文档" order="0" sideWeight="0.48672566" side_tool="true" weight="0.18699732" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Database" order="4" weight="0.3297587" />
-      <window_info anchor="right" x="800" y="124" width="725" height="638" id="SciView" order="5" sideWeight="0.5231388" weight="0.35120642" />
+      <window_info anchor="right" id="Database" order="4" sideWeight="0.49853373" weight="0.3297587" />
+      <window_info anchor="right" x="800" y="124" width="725" height="638" id="SciView" order="5" sideWeight="0.5132743" weight="0.40482575" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49019608" visible="true" weight="0.16152816" />
-      <window_info id="Structure" order="1" sideWeight="0.50980395" side_tool="true" visible="true" weight="0.16152816" />
-      <window_info id="Favorites" order="2" sideWeight="0.50873363" side_tool="true" weight="0.16152816" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" x="224" y="582" width="1286" height="219" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.40175954" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32991204" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32844576" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" weight="0.40175954" />
-      <window_info anchor="bottom" id="调试" order="11" weight="0.3240469" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32991204" />
-      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.49932975" weight="0.31085044" />
-      <window_info anchor="right" x="0" y="0" width="337" height="638" id="文档" order="0" side_tool="true" weight="0.19705094" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="4" weight="0.3297587" />
-      <window_info anchor="right" id="Database" order="5" weight="0.3297587" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -625,7 +679,9 @@
     <MESSAGE value="Tensorflow学习：回归分析--预测燃油效率V1.0" />
     <MESSAGE value="Tensorflow学习：回归分析--预测燃油效率V1.1" />
     <MESSAGE value="Tensorflow学习：回归分析--预测燃油效率V1.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tensorflow学习：回归分析--预测燃油效率V1.2" />
+    <MESSAGE value="Tensorflow学习：回归分析--with tensorboard V1.3" />
+    <MESSAGE value="Tensorflow学习：回归分析--with tensorboard V1.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tensorflow学习：回归分析--with tensorboard V1.4" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../multiple.py">
@@ -650,13 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="1688" selection-start-line="1688" selection-end-line="1688" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="2092" selection-start-line="2092" selection-end-line="2092" />
         </state>
       </provider>
     </entry>
@@ -711,16 +760,6 @@
     <entry file="file://D:/Anaconda3/Lib/site-packages/tensorflow/_api/v1/keras/callbacks/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Text_classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1449">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -754,34 +793,82 @@
     </entry>
     <entry file="file://D:/Anaconda3/Lib/site-packages/tensorflow/python/keras/callbacks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
+        <state relative-caret-position="152">
           <caret line="195" selection-start-line="195" selection-end-line="195" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/tensorflow/python/keras/engine/training.py">
+    <entry file="file://D:/Anaconda3/Lib/site-packages/tensorflow/python/keras/engine/training_arrays.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="879" selection-start-line="879" selection-end-line="879" />
+        <state relative-caret-position="152">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py">
+    <entry file="file://$PROJECT_DIR$/Text_classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="89" column="70" selection-start-line="89" selection-start-column="70" selection-end-line="89" selection-end-column="70" />
+        <state relative-caret-position="299">
+          <caret line="70" column="15" lean-forward="true" selection-start-line="70" selection-start-column="15" selection-end-line="70" selection-end-column="15" />
           <folding>
-            <element signature="e#175#257#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Image_classification(MNIST_Conv2D).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-460">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#195#232#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Regression_predict fuel efficiency.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1491">
-          <caret line="109" column="23" lean-forward="true" selection-start-line="109" selection-start-column="23" selection-end-line="109" selection-end-column="23" />
+        <state relative-caret-position="92">
+          <caret line="4" selection-start-line="4" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="919" selection-start-line="919" selection-end-line="919" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/matplotlib/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="682" selection-start-line="682" selection-end-line="682" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/tensorflow/python/keras/engine/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="1067" selection-start-line="1067" selection-end-line="1067" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST ).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3024">
+          <caret line="201" column="20" selection-start-line="201" selection-start-column="20" selection-end-line="201" selection-end-column="20" />
           <folding>
-            <element signature="e#0#82#0" expanded="true" />
+            <element signature="e#175#257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Image_classification(Fashion_MNIST_Conv2D).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

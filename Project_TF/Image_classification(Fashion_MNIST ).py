@@ -8,8 +8,9 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import tensorflow as tf
 from tensorflow import keras
 from keras.callbacks import TensorBoard
-# 导入辅助库
+import os
 import numpy as np
+np.set_printoptions(threshold=np.inf)           # 设置numpy列表打印时，宽度方向能完全显示
 import matplotlib.pyplot as plt
 print('Tensorflow版本：', tf.__version__)
 
@@ -24,10 +25,10 @@ class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 print('训练集-规模：', train_images.shape)
 print('训练集-图片总数：', len(train_labels))
-print('训练集-标签：', train_labels)
+# print('训练集-标签：', train_labels)
 print('测试集-规模：', test_images.shape)
 print('测试集-图片总数：', len(test_labels))
-print('测试集-标签：', test_labels)
+# print('测试集-标签：', test_labels)
 
 # 在训练网络之前必须对数据进行预处理。 如果您检查训练集中的第一个图像，您将看到像素值落在0到255的范围内:
 plt.figure()
@@ -63,15 +64,17 @@ plt.show()
 # 一、设置网络层
 # 一个神经网络最基本的组成部分便是网络层。网络层从提供给他们的数据中提取表示，并期望这些表示对当前的问题更加有意义
 # 大多数深度学习是由串连在一起的网络层所组成。大多数网络层，例如tf.keras.layers.Dense，具有在训练期间学习的参数。
-model = keras.Sequential([
-        keras.layers.Flatten(input_shape=(28, 28)),
-        keras.layers.Dense(128, activation=tf.nn.relu),
-        keras.layers.Dense(10, activation=tf.nn.softmax)])
-
-        # 网络中的第一层, tf.keras.layers.Flatten, 将图像格式从一个二维数组(包含着28x28个像素)转换成为一个包含着28 * 28 = 784个像素的一维数组。
-        # 可以将这个网络层视为它将图像中未堆叠的像素排列在一起。这个网络层没有需要学习的参数;它仅仅对数据进行格式化。
-        # 在像素被展平之后，网络由一个包含有两个tf.keras.layers.Dense网络层的序列组成。他们被称作“稠密链接层”或“全连接层” 。
-        # 第一个Dense网络层包含有128个节点(或被称为神经元)。第二个(也是最后一个)网络层是一个包含10个节点的softmax层—它将返回包含10个概率分数的数组，总和为1。每个节点包含一个分数，表示当前图像属于10个类别之一的概率。
+    # layers.Flatten层, 将图像格式从一个二维数组(包含着28x28个像素)转换成为一个包含着28 * 28 = 784个像素的一维数组。
+    # layers.Dense(128)可以将这个网络层视为它将图像中未堆叠的像素排列在一起。这个网络层没有需要学习的参数;它仅仅对数据进行格式化。
+    # 在像素被展平之后，网络由一个包含有两个tf.keras.layers.Dense网络层的序列组成。他们被称作“稠密链接层”或“全连接层” 。
+    # 第一个Dense网络层包含有128个节点(或被称为神经元)。第二个(也是最后一个)网络层是一个包含10个节点的softmax层—它将返回包含10个概率分数的数组，总和为1。每个节点包含一个分数，表示当前图像属于10个类别之一的概率。
+def creat_model():
+    model = keras.Sequential([
+            keras.layers.Flatten(input_shape=(28, 28)),
+            keras.layers.Dense(128, activation=tf.nn.relu),
+            keras.layers.Dense(10, activation=tf.nn.softmax)])
+    return model
+model=creat_model()
 
 # 二、编译模型
 # 在模型准备好进行训练之前，它还需要一些配置。这些是在模型的编译(compile)步骤中添加的:
@@ -81,33 +84,75 @@ model = keras.Sequential([
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
+tbCallBack = keras.callbacks.TensorBoard(log_dir='./FashonMNIST',
+                                         histogram_freq=1,
+                                         write_graph=True,
+                                         write_grads=True,
+                                         write_images=True)
+# class PrintDot(keras.callbacks.Callback):   #
+#     def on_epoch_end(self, epoch, logs):
+#         if epoch % 5 == 0: print('完成训练周期epoch：',epoch)
+#         print('>', end='')
+early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
+
+# # 在训练期间保存检查点
+# checkpoint_path = "mnist_training_checkpoint/cp-{epoch:04d}.ckpt"
+# checkpoint_dir = os.path.dirname(checkpoint_path)
+# # 训练模型，并将 ModelCheckpoint 回调传递给该模型：
+# cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
+#                                                  save_weights_only=True,
+#                                                  verbose=1,
+#                                                  period=1)
+
+print('神经网络基本信息')
+model.summary()
+
+print('\n','---------------------评估未训练模型---------------------')
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print('初始模型预测准确率：{:5.2f}%'.format(100*test_acc))
+
+# print('\n','---------------------评估载入检查点权重后的模型---------------------')
+# latest = tf.train.latest_checkpoint(checkpoint_dir)
+# model.load_weights(latest)
+# loss,acc = model.evaluate(test_images, test_labels)
+# print("载入检查点权重后的模型准确率: {:5.2f}%".format(100*acc))
+
 
 # 三、训练模型
 # 将训练数据提供给模型 - 在本案例中，他们是train_images和train_labels数组。
 # 模型学习如何将图像与其标签关联
 # 我们使用模型对测试集进行预测, 在本案例中为test_images数组。我们验证预测结果是否匹配test_labels数组中保存的标签。
 # 通过调用model.fit方法来训练模型 — 模型对训练数据进行"拟合"。
-print('---------------------START TO TRAINING---------------------')
-model.fit(train_images, train_labels, epochs=5)
-print('---------------------FINISHED TRAINING---------------------')
-        # 随着模型训练，将显示损失和准确率等指标。该模型在训练数据上达到约0.88(或88％)的准确度。
-
+print('---------------------训 练 开 始---------------------')
+model.fit(train_images, train_labels,
+          epochs=4,
+          validation_split=0.2,
+          verbose=1,
+          callbacks=[
+                     # PrintDot(),
+                     early_stop,
+                     # cp_callback,
+                     tbCallBack,
+                     ])
+# 调用tensorboard：工作目录打开cmd，输入  tensorboard --logdir=FashonMNIST --host=127.0.0.1
+print('---------------------训 练 结 束---------------------')
+# model.save('Latest_MNIST_trained_model.h5')     #整个模型可以保存到一个h5文件中，其中包含权重值、模型配置和优化器配置
+# 从该文件重新创建模型.
+# new_model = keras.models.load_model('Latest_MNIST_trained_model.h5')
+# new_model.summary()
 
 # 四、评估准确率
 # 比较模型在测试数据集上的执行情况:
-print('=====================START TO EVALUATE=====================')
+print('-----------------训 练 后 模 型 评 估----------------')
 test_loss, test_acc = model.evaluate(test_images, test_labels)
-print('Test accuracy:', test_acc)
+print('模型预测准确率：{:5.2f}%'.format(100*test_acc))
 
 # 五、进行预测
 # 通过训练模型，我们可以使用它来预测某些图像。
 predictions = model.predict(test_images)
-
-    # 第一个预测:
 print('第一个预测各结果置信度：', predictions[0])
-
-    # 预测是10个数字的数组。这些描述了模型的"信心"，即图像对应于10种不同服装中的每一种。我们可以看到哪个标签具有最高的置信度值：
-    # 哪个标签具有最高的置信度值
+# 预测是10个数字的数组。这些描述了模型的"信心"，即图像对应于10种不同服装中的每一种。我们可以看到哪个标签具有最高的置信度值：
+# 哪个标签具有最高的置信度值
 print('预测结果中具有最高的置信度值的标签：', np.argmax(predictions[0]))
 print('图片对应的真实标签：', test_labels[0])
 
@@ -130,32 +175,33 @@ def plot_image(i, predictions_array, true_label, img):
 def plot_value_array(i, predictions_array, true_label):
     predictions_array, true_label = predictions_array[i], true_label[i]
     plt.grid(False)
-    plt.xticks([])
+    plt.xlabel('结果分布')
+    plt.ylabel('概率')
+    plt.xticks([class_names])
     plt.yticks([])
     thisplot = plt.bar(range(10), predictions_array, color="#777777")
     plt.ylim([0, 1])
     predicted_label = np.argmax(predictions_array)
-
     thisplot[predicted_label].set_color('red')
     thisplot[true_label].set_color('blue')
 
-# 单个对象的预测
-    # 第0个图像，预测和预测数组。
-i = 0
-plt.figure(figsize=(6,3))
-plt.subplot(1,2,1)
-plot_image(i, predictions, test_labels, test_images)
-plt.subplot(1,2,2)
-plot_value_array(i, predictions,  test_labels)
-plt.show()
-    # 第12个图像，预测和预测数组。
-i = 12
-plt.figure(figsize=(6,3))
-plt.subplot(1,2,1)
-plot_image(i, predictions, test_labels, test_images)
-plt.subplot(1,2,2)
-plot_value_array(i, predictions,  test_labels)
-plt.show()
+# # 单个对象的预测
+#     # 第0个图像，预测和预测数组。
+# i = 0
+# plt.figure(figsize=(6,3))
+# plt.subplot(1,2,1)
+# plot_image(i, predictions, test_labels, test_images)
+# plt.subplot(1,2,2)
+# plot_value_array(i, predictions,  test_labels)
+# plt.show()
+#     # 第12个图像，预测和预测数组。
+# i = 12
+# plt.figure(figsize=(6,3))
+# plt.subplot(1,2,1)
+# plot_image(i, predictions, test_labels, test_images)
+# plt.subplot(1,2,2)
+# plot_value_array(i, predictions, test_labels)
+# plt.show()
 
 # 多个对象的预测
     # 绘制几个图像及其预测结果。正确的预测标签是蓝色的，不正确的预测标签是红色的。该数字给出了预测标签的百分比(满分100)。请注意，即使非常自信，也可能出错。
@@ -171,20 +217,17 @@ for i in range(num_images):
   plot_value_array(i, predictions, test_labels)
 plt.show()
 
-    # 使用训练的模型对单个图像进行预测。
-    # 从测试数据集中获取图像
+# 使用训练的模型对单个图像进行预测。
+# 从测试数据集中获取图像
 img = test_images[0]
 print(img.shape)
-
     # tf.keras模型经过优化，可以一次性对批量,或者一个集合的数据进行预测。因此，即使我们使用单个图像，我们也需要将其添加到列表中:
     # 将图像添加到批次中，即使它是唯一的成员。
 img = (np.expand_dims(img,0))
 print(img.shape)
-
     # 现在来预测图像:
 predictions_single = model.predict(img)
 print(predictions_single)
-
 plot_value_array(0, predictions_single, test_labels)
 plt.xticks(range(10), class_names, rotation=45)
 plt.show()
