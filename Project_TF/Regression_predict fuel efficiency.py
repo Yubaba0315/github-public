@@ -17,20 +17,20 @@ print('Tensorflow版本：', tf.__version__)
 
 # 1.1 下载数据集
 dataset_path = keras.utils.get_file("auto-mpg.data", "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
-print('数据存放路径：', dataset_path)
+print('原始数据集存放路径：', dataset_path)
 # 用pandas导入数据
 # 数据内容：燃油利用率、气缸数、排量、马力、重量、加速度、制造年份、国家
 column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year', 'Origin']
 raw_dataset = pd.read_csv(dataset_path, names=column_names, na_values="?", comment='\t', sep=" ", skipinitialspace=True)
 dataset = raw_dataset.copy()
-print('数据集头部：'+'\n', dataset.head())
+print('\n'+'数据集头部：'+'\n', dataset.head())
 # print('数据集尾部：'+'\n', dataset.tail())
 # print(dataset)
 print('数据集尺寸：', dataset.shape)
 print('数据条数：', len(dataset))
 # 1.2 数据清理
 # 1.2.1 删除未知数据
-print('数据集中的未知内容：'+ '\n', dataset.isna().sum())
+print('\n'+'数据集中的未知内容：'+ '\n',dataset.isna().sum())
 dataset = dataset.dropna()
 # 1.2.2“Origin”这一列实际上是分类(国家)，而不是数字，所以把它转换为独热编码：
 origin = dataset.pop('Origin')
@@ -38,13 +38,16 @@ dataset['USA'] = (origin == 1)*1.0
 dataset['Europe'] = (origin == 2)*1.0
 dataset['Japan'] = (origin == 3)*1.0
 # print('数据集：'+ '\n',dataset)
-print('产地信息-独热编码：'+ '\n', dataset.tail())
+print('\n'+'产地信息-独热编码：'+ '\n', dataset.tail())
 # 1.3 将数据分为训练集和测试集
 # 训练集数据按80%的比例取样，random_state=0表示不可取得重复条目，random_state=1时可以取得重复条目
 train_dataset = dataset.sample(frac=0.8,random_state=0)
 # 测试集数据为（全体数据集-已被采纳为训练集部分）
 test_dataset = dataset.drop(train_dataset.index)
 print('训练集头部：' + '\n', train_dataset.head())
+print('\n'+'训练集中所有的键（数据维度）：'+ '\n', train_dataset.keys())
+print('数据维度数目：', len(train_dataset.keys()))
+
 # print('测试集尾部：' + '\n', test_dataset.tail())
 # 1.4   了解数据结构
 # 1.4.1 快速浏览训练集中几对列的联合分布：
@@ -55,7 +58,6 @@ train_stats = train_dataset.describe()
 train_stats.pop("MPG")
 train_stats = train_stats.transpose()
 print('除MPG，统计指标：'+ '\n', train_stats)
-print('训练集条数：', len(train_stats))
 # 1.5. 从标签中分割特征
 # 将预测目标值“燃油效率MPG”与特征分开
 train_labels = train_dataset.pop('MPG')
@@ -104,41 +106,44 @@ print("初始模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae)
 # 2.3. 训练模型
 # 训练模型1000个周期，并在history对象中记录训练和验证准确性：
 # 通过为每个完成的周期打印“>”来显示训练进度
-class PrintDot(keras.callbacks.Callback):   #
+class PrintDot(keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs):
         if epoch % 100 == 0: print('完成训练周期epoch：',epoch)
         print('>', end='')
-
+early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
 tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph',
-histogram_freq=1,
-write_graph=True,
-write_grads=True,
-write_images=True)
+                                         histogram_freq=1,
+                                         batch_size=30,
+                                         write_graph=True,
+                                         write_grads=True,
+                                         write_images=True)
 # histogram_freq=1,
 # write_graph=True,
 # write_images=True)
 # tb=keras.callbacks.TensorBoard(log_dir='./logs',  # log 目录
-# #             histogram_freq=1,  # 按照何等频率（epoch）来计算直方图，0为不计算
-# #             batch_size=32, # 用多大量的数据计算直方图
-# #             write_graph=True,  # 是否存储网络结构图
-# #             write_grads=True,  # 是否可视化梯度直方图
-# #             write_images=True,) # 是否可视化参数
-# # embeddings_freq=0,
-# # embeddings_layer_names=None,
-# # embeddings_metadata=None)
+#             histogram_freq=1,  # 按照何等频率（epoch）来计算直方图，0为不计算
+#             batch_size=32, # 用多大量的数据计算直方图
+#             write_graph=True,  # 是否存储网络结构图
+#             write_grads=True,  # 是否可视化梯度直方图
+#             write_images=True,) # 是否可视化参数
+# embeddings_freq=0,
+# embeddings_layer_names=None,
+# embeddings_metadata=None)
 
 
-print('\n','--------------------------------START TO TRAINING--------------------------------')
+print('\n','---------------------训 练 开 始---------------------')
 EPOCHS = 500
 history = model.fit(normed_train_data, train_labels,
                     epochs=EPOCHS,
                     validation_split=0.2,
                     verbose=0,
-                    callbacks=[tbCallBack,PrintDot()])     #keras.callbacks.EarlyStopping(patience=10,mode='min',verbose=1),
-print('\n','--------------------------------FINISHED TRAINING--------------------------------')
+                    callbacks=[PrintDot(),early_stop,tbCallBack])
+#callbacks=[PrintDot(),early_stop,tbCallBack])
+#keras.callbacks.EarlyStopping(patience=10,mode='min',verbose=1),
+print('\n','---------------------训 练 结 束----------------------')
 # 调用tensorboard：工作目录打开cmd，输入tensorboard --logdir=Graph --host=127.0.0.1
 
-print('\n','---------------------再次评估模型---------------------')
+print('\n','---------------------训练后模型评估---------------------')
 loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
 print("模型损失(loss)：{:5.2f} MPG".format(loss))
 print("模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae))
@@ -149,6 +154,7 @@ print("模型均方误差(Mean Square Error)：{:5.2f} MPG^2".format(mse))
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
 print('周期历史记录：' + '\n', hist.tail())
+
 
 def plot_history(history):
   hist = pd.DataFrame(history.history)
@@ -178,23 +184,23 @@ plot_history(history)
 
 # 让我们更新model.fit调用，以便在验证分数没有提高时自动停止训练。我们将使用EarlyStopping回调来测试每个周期的训练状态。
 # 如果经过一定数量的周期而没有显示出改进，则自动停止训练。
-print('使用EarlyStopping回调来测试每个周期的训练状态，在验证分数没有提高时自动停止训练。')
-model = build_model()
-early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)     # 参数 patience 是检查改进的周期量
-history = model.fit(normed_train_data, train_labels,
-                    epochs=EPOCHS,
-                    validation_split = 0.2,
-                    verbose=0,
-                    callbacks=[early_stop, PrintDot()])
-plot_history(history)
+# print('使用EarlyStopping回调来测试每个周期的训练状态，在验证分数没有提高时自动停止训练。')
+# model = build_model()
+# early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)     # 参数 patience 是检查改进的周期量
+# history = model.fit(normed_train_data, train_labels,
+#                     epochs=EPOCHS,
+#                     validation_split = 0.2,
+#                     verbose=0,
+#                     callbacks=[early_stop, PrintDot()])
+# plot_history(history)
 # 上图显示在验证集上平均误差通常约为+/-2MPG
 
 # 使用测试集来看一下泛化模型效果，我们在训练模型时没有使用测试集
 # 当我们在现实世界中使用模型时，我们可以期待模型预测。
-print('\n','---------------------再次评估模型---------------------')
-loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
-print("模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae))
-print("模型均方误差(Mean Square Error)：{:5.2f} MPG^2".format(mse))
+# print('\n','---------------------再次评估模型---------------------')
+# loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
+# print("模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae))
+# print("模型均方误差(Mean Square Error)：{:5.2f} MPG^2".format(mse))
 
 
 # 2.4. 预测
