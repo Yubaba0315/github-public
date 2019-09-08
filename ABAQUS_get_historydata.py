@@ -46,4 +46,3 @@ for odbpath in odblist:
     file.close()
 print('All data output completed!')
 
-
