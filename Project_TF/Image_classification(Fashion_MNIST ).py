@@ -93,7 +93,7 @@ tbCallBack = keras.callbacks.TensorBoard(log_dir='./FashonMNIST',
 #     def on_epoch_end(self, epoch, logs):
 #         if epoch % 5 == 0: print('完成训练周期epoch：',epoch)
 #         print('>', end='')
-early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
+early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=2)
 
 # # 在训练期间保存检查点
 # checkpoint_path = "mnist_training_checkpoint/cp-{epoch:04d}.ckpt"
@@ -125,7 +125,7 @@ print('初始模型预测准确率：{:5.2f}%'.format(100*test_acc))
 # 通过调用model.fit方法来训练模型 — 模型对训练数据进行"拟合"。
 print('---------------------训 练 开 始---------------------')
 model.fit(train_images, train_labels,
-          epochs=4,
+          epochs=20,
           validation_split=0.2,
           verbose=1,
           callbacks=[
@@ -136,9 +136,9 @@ model.fit(train_images, train_labels,
                      ])
 # 调用tensorboard：工作目录打开cmd，输入  tensorboard --logdir=FashonMNIST --host=127.0.0.1
 print('---------------------训 练 结 束---------------------')
-# model.save('Latest_MNIST_trained_model.h5')     #整个模型可以保存到一个h5文件中，其中包含权重值、模型配置和优化器配置
+# model.save('Latest_MNIST(Conv2D)_trained_model.h5')     #整个模型可以保存到一个h5文件中，其中包含权重值、模型配置和优化器配置
 # 从该文件重新创建模型.
-# new_model = keras.models.load_model('Latest_MNIST_trained_model.h5')
+# new_model = keras.models.load_model('Latest_MNIST(Conv2D)_trained_model.h5')
 # new_model.summary()
 
 # 四、评估准确率
@@ -175,9 +175,9 @@ def plot_image(i, predictions_array, true_label, img):
 def plot_value_array(i, predictions_array, true_label):
     predictions_array, true_label = predictions_array[i], true_label[i]
     plt.grid(False)
-    plt.xlabel('结果分布')
-    plt.ylabel('概率')
-    plt.xticks([class_names])
+    plt.xlabel('Label')
+    plt.ylabel('Probability')
+    plt.xticks(range(10), class_names, rotation=90)
     plt.yticks([])
     thisplot = plt.bar(range(10), predictions_array, color="#777777")
     plt.ylim([0, 1])
@@ -185,23 +185,23 @@ def plot_value_array(i, predictions_array, true_label):
     thisplot[predicted_label].set_color('red')
     thisplot[true_label].set_color('blue')
 
-# # 单个对象的预测
-#     # 第0个图像，预测和预测数组。
-# i = 0
-# plt.figure(figsize=(6,3))
-# plt.subplot(1,2,1)
-# plot_image(i, predictions, test_labels, test_images)
-# plt.subplot(1,2,2)
-# plot_value_array(i, predictions,  test_labels)
-# plt.show()
-#     # 第12个图像，预测和预测数组。
-# i = 12
-# plt.figure(figsize=(6,3))
-# plt.subplot(1,2,1)
-# plot_image(i, predictions, test_labels, test_images)
-# plt.subplot(1,2,2)
-# plot_value_array(i, predictions, test_labels)
-# plt.show()
+# 单个对象的预测
+    # 第0个图像，预测和预测数组。
+i = 0
+plt.figure(figsize=(6,3))
+plt.subplot(1,2,1)
+plot_image(i, predictions, test_labels, test_images)
+plt.subplot(1,2,2)
+plot_value_array(i, predictions,  test_labels)
+plt.show()
+    # 第12个图像，预测和预测数组。
+i = 12
+plt.figure(figsize=(6,3))
+plt.subplot(1,2,1)
+plot_image(i, predictions, test_labels, test_images)
+plt.subplot(1,2,2)
+plot_value_array(i, predictions, test_labels)
+plt.show()
 
 # 多个对象的预测
     # 绘制几个图像及其预测结果。正确的预测标签是蓝色的，不正确的预测标签是红色的。该数字给出了预测标签的百分比(满分100)。请注意，即使非常自信，也可能出错。
@@ -209,7 +209,7 @@ def plot_value_array(i, predictions_array, true_label):
 num_rows = 5
 num_cols = 3
 num_images = num_rows*num_cols
-plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+plt.figure(figsize=(2*4*num_cols, 4*num_rows))
 for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+1)
   plot_image(i, predictions, test_labels, test_images)

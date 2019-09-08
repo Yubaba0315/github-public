@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 pd.set_option('display.width', None)    # 设置pandas列表打印时，宽度方向能完全显示
 pd.set_option('display.max_row', None)  # 设置pandas列表打印时，条数方向能完全显示
-# import numpy as np
-# np.set_printoptions(threshold=np.inf)
+import numpy as np
+np.set_printoptions(threshold=np.inf)
 # 使用seaborn进行pairplot数据可视化
 import seaborn as sns
 
@@ -28,6 +28,7 @@ print('\n'+'数据集头部：'+'\n', dataset.head())
 # print(dataset)
 print('数据集尺寸：', dataset.shape)
 print('数据条数：', len(dataset))
+
 # 1.2 数据清理
 # 1.2.1 删除未知数据
 print('\n'+'数据集中的未知内容：'+ '\n',dataset.isna().sum())
@@ -48,6 +49,13 @@ print('训练集头部：' + '\n', train_dataset.head())
 print('\n'+'训练集中所有的键（数据维度）：'+ '\n', train_dataset.keys())
 print('数据维度数目：', len(train_dataset.keys()))
 
+# 量与因变量的相关性分析，绘制相关性矩阵热力图，比较各个变量之间的相关性：
+#自变量与因变量的相关性分析
+plt.figure(figsize = (10,5))
+internal_chars = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year','USA', 'Europe', 'Japan']
+corrmat = dataset[internal_chars].corr()  # 计算相关系数
+sns.heatmap(corrmat, square=False, linewidths=.5, annot=True) # 热力图
+
 # print('测试集尾部：' + '\n', test_dataset.tail())
 # 1.4   了解数据结构
 # 1.4.1 快速浏览训练集中几对列的联合分布：
@@ -55,7 +63,7 @@ sns.pairplot(train_dataset[['MPG', 'Cylinders', 'Displacement', 'Horsepower','We
 plt.show()
 # 1.4.2 查看整体统计数据：
 train_stats = train_dataset.describe()
-train_stats.pop("MPG")
+train_stats.pop('MPG')
 train_stats = train_stats.transpose()
 print('除MPG，统计指标：'+ '\n', train_stats)
 # 1.5. 从标签中分割特征
@@ -96,7 +104,7 @@ model = build_model()
 print('神经网络基本信息')
 model.summary()
 print('\n','---------------------评估未训练模型---------------------')
-loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
+loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=1)
 print("初始模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae))
 # 现在试试这个模型。从训练数据中取出一批10个样本数据并在调用model.predict函数。
 # example_batch = normed_train_data[:10]
@@ -112,20 +120,11 @@ class PrintDot(keras.callbacks.Callback):
         print('>', end='')
 early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
 tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph',
-                                         histogram_freq=1,
-                                         batch_size=30,
-                                         write_graph=True,
-                                         write_grads=True,
-                                         write_images=True)
-# histogram_freq=1,
-# write_graph=True,
-# write_images=True)
-# tb=keras.callbacks.TensorBoard(log_dir='./logs',  # log 目录
-#             histogram_freq=1,  # 按照何等频率（epoch）来计算直方图，0为不计算
-#             batch_size=32, # 用多大量的数据计算直方图
-#             write_graph=True,  # 是否存储网络结构图
-#             write_grads=True,  # 是否可视化梯度直方图
-#             write_images=True,) # 是否可视化参数
+                                         histogram_freq=1, # 按照何等频率（epoch）来计算直方图，0为不计算
+                                         batch_size=30, # 用多大量的数据计算直方图
+                                         write_graph=True, # 是否存储网络结构图
+                                         write_grads=True, # 是否可视化梯度直方图
+                                         write_images=True) # 是否可视化参数
 # embeddings_freq=0,
 # embeddings_layer_names=None,
 # embeddings_metadata=None)
@@ -144,12 +143,10 @@ print('\n','---------------------训 练 结 束----------------------')
 # 调用tensorboard：工作目录打开cmd，输入tensorboard --logdir=Graph --host=127.0.0.1
 
 print('\n','---------------------训练后模型评估---------------------')
-loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=0)
+loss, mae, mse = model.evaluate(normed_test_data, test_labels, verbose=1)
 print("模型损失(loss)：{:5.2f} MPG".format(loss))
 print("模型平均绝对误差(Mean Abs Error)：{:5.2f} MPG".format(mae))
 print("模型均方误差(Mean Square Error)：{:5.2f} MPG^2".format(mse))
-
-
 # 使用存储在history对象中的统计数据可视化模型的训练进度。
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
